@@ -1,4 +1,10 @@
+import { Model } from "./model.ts";
+
 export type Action =
+  | {
+    $: 'initializeModel'
+    model: Model
+  }
   | {
     $: 'onTopInputKeyUp'
   }

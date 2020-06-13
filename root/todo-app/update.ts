@@ -1,9 +1,21 @@
+/// <reference lib="dom"/>
 import { Action } from "./action.ts";
 import { Model } from "./model.ts";
 import { LevoUpdate } from "https://deno.land/x/levo@v0.0.7/mod/levo-update.ts";
 
 export const update: LevoUpdate<Model, Action> = (model, action, event) => {
+  const {newModel, then} = update$(model, action, event)
+  window.localStorage.setItem('model', JSON.stringify(newModel))
+  return {newModel, then}
+}
+
+const update$: LevoUpdate<Model, Action> = (model, action, event) => {
   switch (action.$) {
+    case 'initializeModel': {
+      return {
+        newModel: action.model
+      }
+    }
     case 'focusItem': {
       return {
         newModel: {
