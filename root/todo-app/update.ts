@@ -11,6 +11,14 @@ export const update: LevoUpdate<Model, Action> = (model, action, event) => {
 
 const update$: LevoUpdate<Model, Action> = (model, action, event) => {
   switch (action.$) {
+    case 'changeTab': {
+      return {
+        newModel: {
+          ...model,
+          tab: action.to
+        }
+      }
+    }
     case 'initializeModel': {
       return {
         newModel: action.model

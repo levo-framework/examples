@@ -26,15 +26,22 @@ export const view = (model: Model): Levo.Element<Action> => {
           ['section', { class: 'main' }, [
             ['input', { id: 'toggle-all', class: 'toggle-all', type: 'checkbox' }],
             ['label', { for: 'toggle-all' }, ['Mark all as complete']],
-            ['ul', { class: 'todo-list' }, model.items.map((item, itemIndex) =>
-              ['li', { class: [item.completed ? 'completed' : '', model.focusedItemIndex === itemIndex ? 'editing': ''].join(' '), ondblclick: $.focusItem({itemIndex}) }, [
-                ['div', { class: 'view' }, [
-                  ['input', { class: 'toggle', type: 'checkbox', checked: item.completed ? 'true' : undefined, onclick: $.toggleItem({ itemIndex }) }],
-                  ['label', {}, [item.content]],
-                  ['button', { class: 'destroy', onclick: $.removeItem({itemIndex}) },]
-                ]],
-                ['input', { class: 'edit', value: item.content, onkeyup: $.onFocusItemInputKeyUp(),  }]
-              ]])]
+            ['ul', { class: 'todo-list' }, 
+            model.items
+              .flatMap((item, itemIndex) =>
+                !(model.tab === 'all' 
+                  ? true
+                  : model.tab === 'active'
+                    ? !item.completed
+                    : item.completed) ? [] :
+                [['li', { class: [item.completed ? 'completed' : '', model.focusedItemIndex === itemIndex ? 'editing': ''].join(' '), ondblclick: $.focusItem({itemIndex}) }, [
+                  ['div', { class: 'view' }, [
+                    ['input', { class: 'toggle', type: 'checkbox', checked: item.completed ? 'true' : undefined, onclick: $.toggleItem({ itemIndex }) }],
+                    ['label', {}, [item.content]],
+                    ['button', { class: 'destroy', onclick: $.removeItem({itemIndex}) },]
+                  ]],
+                  ['input', { class: 'edit', value: item.content, onkeyup: $.onFocusItemInputKeyUp(),  }]
+                ]]])]
           ]],
           ['footer', { class: 'footer' }, [
             ['span', { class: 'todo-count' }, [
@@ -42,14 +49,14 @@ export const view = (model: Model): Levo.Element<Action> => {
               ` item${model.items.length > 0 ? 's' : ''} left`
             ]],
             ['ul', { class: 'filters' }, [
-              ['li', {}, [
-                ['a', { class: 'selected', href: '#/' }, ['All']]
+              ['li', {onclick: $.changeTab({to: 'all'})}, [
+                ['a', { class: model.tab === 'all' ? 'selected' : undefined }, ['All']]
               ]],
-              ['li', {}, [
-                ['a', { href: '#/active' }, ['Active']]
+              ['li', {onclick: $.changeTab({to: 'active'})}, [
+                ['a', {class: model.tab === 'active' ? 'selected' : undefined  }, ['Active']]
               ]],
-              ['li', {}, [
-                ['a', { href: '#/completed' }, [
+              ['li', {onclick: $.changeTab({to: 'completed'})}, [
+                ['a', {class: model.tab === 'completed' ? 'selected' : undefined }, [
                   'Completed'
                 ]]
               ]]

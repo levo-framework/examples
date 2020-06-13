@@ -5,4 +5,5 @@ export type Model = {
     completed: boolean
   }[]
   focusedItemIndex?: number
+  tab: 'all' | 'active' | 'completed'
 };

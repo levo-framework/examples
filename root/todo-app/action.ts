@@ -2,6 +2,10 @@ import { Model } from "./model.ts";
 
 export type Action =
   | {
+    $: 'changeTab'
+    to: Model['tab']
+  }
+  | {
     $: 'initializeModel'
     model: Model
   }
