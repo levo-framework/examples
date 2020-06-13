@@ -2,28 +2,28 @@ import { Model } from "./model.ts";
 
 export type Action =
   | {
-    $: 'changeTab'
-    to: Model['tab']
+    $: "changeTab";
+    to: Model["tab"];
   }
   | {
-    $: 'initializeModel'
-    model: Model
+    $: "initializeModel";
+    model: Model;
   }
   | {
-    $: 'onTopInputKeyUp'
+    $: "onTopInputKeyUp";
   }
   | {
-    $: 'onFocusItemInputKeyUp'
+    $: "onFocusItemInputKeyUp";
   }
   | {
-    $: 'toggleItem'
-    itemIndex: number
+    $: "toggleItem";
+    itemIndex: number;
   }
   | {
-    $: 'removeItem'
-    itemIndex: number
+    $: "removeItem";
+    itemIndex: number;
   }
   | {
-    $: 'focusItem'
-    itemIndex: number
-  }
+    $: "focusItem";
+    itemIndex: number;
+  };

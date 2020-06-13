@@ -1,9 +1,9 @@
 export type Model = {
-  newTodoValue: string
+  newTodoValue: string;
   items: {
-    content: string
-    completed: boolean
-  }[]
-  focusedItemIndex?: number
-  tab: 'all' | 'active' | 'completed'
+    content: string;
+    completed: boolean;
+  }[];
+  focusedItemIndex?: number;
+  tab: "all" | "active" | "completed";
 };
