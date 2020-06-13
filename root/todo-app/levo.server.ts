@@ -8,8 +8,8 @@ serve<Model, Action>({
     return response.page({
       view,
       model: {
-        rotation: 0,
-        color: "black",
+        newTodoValue: '',
+        items: [],
       },
     });
   },
