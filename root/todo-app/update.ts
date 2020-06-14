@@ -5,23 +5,20 @@ import { LevoUpdate } from "https://deno.land/x/levo@v0.0.8/mod/levo-update.ts";
 
 export const update: LevoUpdate<Model, Action> = (model, action, event) => {
   const { newModel, then } = update$(model, action, event);
-  window.localStorage.setItem("model", JSON.stringify(newModel));
+  if (action.$ !== "initializeItems") {
+    window.localStorage.setItem("items", JSON.stringify(newModel.items));
+  }
   return { newModel, then };
 };
 
 const update$: LevoUpdate<Model, Action> = (model, action, event) => {
   switch (action.$) {
-    case "changeTab": {
+    case "initializeItems": {
       return {
         newModel: {
           ...model,
-          tab: action.to,
+          items: action.items,
         },
-      };
-    }
-    case "initializeModel": {
-      return {
-        newModel: action.model,
       };
     }
     case "focusItem": {

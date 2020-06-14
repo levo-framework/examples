@@ -17,8 +17,7 @@ export const view = (model: Model): Levo.Element<Action> => {
           { name: "viewport", content: "width=device-width, initial-scale=1" },
         ],
         ["title", {}, ["Levo • TodoMVC"]],
-        ["base", { href: "todo-app/levo.assets/" }],
-        ["link", { rel: "stylesheet", href: "index.css" }],
+        ["link", { rel: "stylesheet", href: "todo-app/levo.assets/index.css" }],
       ]],
       ["body", {}, [
         ["section", { class: "todoapp" }, [
@@ -46,15 +45,15 @@ export const view = (model: Model): Levo.Element<Action> => {
               { class: "todo-list" },
               model.items
                 .flatMap((item, itemIndex) =>
-                  !(model.tab === "all" ? true : model.tab === "active"
-                  ? !item.completed
-                  : item.completed)
+                  !(model.tab === "all"
+                    ? true
+                    : model.tab === "active"
+                    ? !item.completed
+                    : item.completed)
                     ? []
                     : [["li", {
                       class: [
-                        item.completed
-                          ? "completed"
-                          : "",
+                        item.completed ? "completed" : "",
                         model.focusedItemIndex === itemIndex ? "editing" : "",
                       ].join(" "),
                       ondblclick: $.focusItem({ itemIndex }),
@@ -96,24 +95,33 @@ export const view = (model: Model): Levo.Element<Action> => {
               ` item${model.items.length > 0 ? "s" : ""} left`,
             ]],
             ["ul", { class: "filters" }, [
-              ["li", { onclick: $.changeTab({ to: "all" }) }, [
+              ["li", {}, [
                 [
                   "a",
-                  { class: model.tab === "all" ? "selected" : undefined },
+                  {
+                    class: model.tab === "all" ? "selected" : undefined,
+                    href: "todo-app?tab=all",
+                  },
                   ["All"],
                 ],
               ]],
-              ["li", { onclick: $.changeTab({ to: "active" }) }, [
+              ["li", {}, [
                 [
                   "a",
-                  { class: model.tab === "active" ? "selected" : undefined },
+                  {
+                    class: model.tab === "active" ? "selected" : undefined,
+                    href: "todo-app?tab=active",
+                  },
                   ["Active"],
                 ],
               ]],
-              ["li", { onclick: $.changeTab({ to: "completed" }) }, [
+              ["li", {}, [
                 [
                   "a",
-                  { class: model.tab === "completed" ? "selected" : undefined },
+                  {
+                    class: model.tab === "completed" ? "selected" : undefined,
+                    href: "todo-app?tab=completed",
+                  },
                   [
                     "Completed",
                   ],

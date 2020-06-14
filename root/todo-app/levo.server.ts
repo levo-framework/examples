@@ -5,12 +5,15 @@ import { Model } from "./model.ts";
 
 serve<Model, Action>({
   getResponse: async (request, response) => {
+    const tab = new URLSearchParams(request.search).get("tab");
     return response.page({
       view,
       model: {
         newTodoValue: "",
         items: [],
-        tab: 'all' as const
+        tab: tab && ["all", "active", "completed"].includes(tab)
+          ? tab as Model["tab"]
+          : "all" as const,
       },
     });
   },

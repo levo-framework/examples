@@ -5,9 +5,9 @@ import { LevoInit } from "https://deno.land/x/levo@v0.0.8/mod/levo-init.ts";
 
 export const init: LevoInit<Model, Action> = (model, dispatch) => {
   try {
-    const result = window.localStorage.getItem("model");
+    const result = window.localStorage.getItem("items");
     if (result) {
-      dispatch({ $: "initializeModel", model: JSON.parse(result) });
+      dispatch({ $: "initializeItems", items: JSON.parse(result) });
     }
   } catch {
   }
