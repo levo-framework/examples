@@ -1,6 +1,6 @@
 import { Action } from "./action.ts";
 import { Model } from "./model.ts";
-import { LevoUpdate } from "https://deno.land/x/levo@v0.0.8/mod/levo-update.ts";
+import { LevoUpdate } from "https://deno.land/x/levo@v0.0.9/mod/levo-update.ts";
 
 export const update: LevoUpdate<Model, Action> = (model, action, event) => {
   switch (action.$) {

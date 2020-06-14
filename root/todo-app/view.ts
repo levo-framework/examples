@@ -3,7 +3,7 @@ import {
   createActions,
   render,
   Levo,
-} from "https://deno.land/x/levo@v0.0.8/mod/levo-view.ts";
+} from "https://deno.land/x/levo@v0.0.9/mod/levo-view.ts";
 import { Model } from "./model.ts";
 
 export const view = (model: Model): Levo.Element<Action> => {
@@ -51,7 +51,7 @@ export const view = (model: Model): Levo.Element<Action> => {
                     ? !item.completed
                     : item.completed)
                     ? []
-                    : [["li", {
+                    : [render<Action>(["li", {
                       class: [
                         item.completed ? "completed" : "",
                         model.focusedItemIndex === itemIndex ? "editing" : "",
@@ -85,7 +85,7 @@ export const view = (model: Model): Levo.Element<Action> => {
                           onkeyup: $.onFocusItemInputKeyUp(),
                         },
                       ],
-                    ]]]
+                    ]])]
                 ),
             ],
           ]],
