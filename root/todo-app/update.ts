@@ -1,7 +1,7 @@
 /// <reference lib="dom"/>
 import { Action } from "./action.ts";
 import { Model } from "./model.ts";
-import { LevoUpdate } from "https://deno.land/x/levo@v0.0.9/mod/levo-update.ts";
+import { LevoUpdate } from "https://deno.land/x/levo@v0.0.11/mod/levo-update.ts";
 
 export const update: LevoUpdate<Model, Action> = (model, action, event) => {
   const { newModel, then } = update$(model, action, event);

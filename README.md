@@ -4,7 +4,7 @@ This repository contains a set of example applications that can be build with Le
 ## How to try out the examples?
 Clone this repository. Then run the following command.
 ```
-deno run --allow-all --unstable app.ts
+deno run --allow-all --unstable app.ts --production
 ```
 
 ## How to access the examples?

@@ -3,11 +3,12 @@ import {
   createActions,
   render,
   Levo,
-} from "https://deno.land/x/levo@v0.0.9/mod/levo-view.ts";
+} from "https://deno.land/x/levo@v0.0.11/mod/levo-view.ts";
 import { Model } from "./model.ts";
 
 export const view = (model: Model): Levo.Element<Action> => {
   const $ = createActions<Action>();
+  console.log(model.focusedItemIndex)
   return render<Action>(
     ["html", { lang: "en" }, [
       ["head", {}, [
