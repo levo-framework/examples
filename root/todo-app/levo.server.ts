@@ -1,6 +1,6 @@
-import { view } from "./view.ts";
+import { view } from "./view.tsx";
 import { Action } from "./action.ts";
-import { serve } from "https://deno.land/x/levo@v0.0.11/mod/levo-serve.ts";
+import { serve } from "../../../core/mod/levo-serve.ts";
 import { Model } from "./model.ts";
 
 serve<Model, Action>({

@@ -1,9 +1,9 @@
 /// <reference lib="dom"/>
 import { Action } from "./action.ts";
 import { Model } from "./model.ts";
-import { LevoUpdate } from "https://deno.land/x/levo@v0.0.11/mod/levo-update.ts";
+import { Levo } from "../../../core/mod/levo-view.ts";
 
-export const update: LevoUpdate<Model, Action> = (model, action, event) => {
+export const update: Levo.Update<Model, Action> = (model, action, event) => {
   const { newModel, then } = update$(model, action, event);
   if (action.$ !== "initializeItems") {
     window.localStorage.setItem("items", JSON.stringify(newModel.items));
@@ -11,7 +11,7 @@ export const update: LevoUpdate<Model, Action> = (model, action, event) => {
   return { newModel, then };
 };
 
-const update$: LevoUpdate<Model, Action> = (model, action, event) => {
+const update$: Levo.Update<Model, Action> = (model, action, event) => {
   switch (action.$) {
     case "initializeItems": {
       return {
@@ -30,14 +30,15 @@ const update$: LevoUpdate<Model, Action> = (model, action, event) => {
       };
     }
     case "onFocusItemInputKeyUp": {
-      if (event.key === "Enter") {
+      console.log(event);
+      if ((event as any).key === "Enter") {
         return {
           newModel: {
             ...model,
             focusedItemIndex: undefined,
             items: model.items.map((item, itemIndex) =>
               model.focusedItemIndex === itemIndex
-                ? { ...item, content: event?.target?.value ?? "" }
+                ? { ...item, content: (event as any)?.target?.value ?? "" }
                 : item
             ),
           },
@@ -47,7 +48,7 @@ const update$: LevoUpdate<Model, Action> = (model, action, event) => {
       }
     }
     case "onTopInputKeyUp": {
-      if (event?.key === "Enter") {
+      if ((event as any)?.key === "Enter") {
         return {
           newModel: {
             ...model,
@@ -64,7 +65,7 @@ const update$: LevoUpdate<Model, Action> = (model, action, event) => {
         return {
           newModel: {
             ...model,
-            newTodoValue: event?.target?.value ?? "",
+            newTodoValue: (event as any)?.target?.value ?? "",
           },
         };
       }
